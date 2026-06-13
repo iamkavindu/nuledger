@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:18-alpine
+    container_name: nuledger_postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: nuledger
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - nuledger_pg_data:/var/lib/postgresql/18/docker
+      - ./docker/postgres/init:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d nuledger"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  nuledger_pg_data:
