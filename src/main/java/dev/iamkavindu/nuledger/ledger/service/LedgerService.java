@@ -168,7 +168,6 @@ public class LedgerService {
         if (original.getReversesEntryId() != null) {
             throw new CannotReverseEntryException(original.getId());
         }
-
         if (journalEntryRepository.findByReversesEntryId(original.getId()).isPresent()) {
             throw new EntryAlreadyReversedException(original.getId());
         }
@@ -179,7 +178,6 @@ public class LedgerService {
         }
 
         var contraLines = originalLines.stream().map(this::toContraPostingLine).toList();
-
         var reversalEntryId = postBalancedLines(idempotencyKey, contraLines, command.correlationId(), original.getId());
 
         return new ReverseTransactionResult(reversalEntryId, original.getId(), false);
@@ -231,6 +229,7 @@ public class LedgerService {
             journalLine.setLineOrder(order++);
             journalLineRepository.save(journalLine);
         }
+
         return entry.getId();
     }
 
@@ -238,7 +237,6 @@ public class LedgerService {
         var flipped = line.getDirection() == JournalLine.LineDirection.DEBIT
                 ? JournalDirection.CREDIT
                 : JournalDirection.DEBIT;
-
         var money = Money.fromDecimal(line.getAmount(), line.getCurrency().trim());
 
         return new PostingLine(AccountId.of(line.getAccountId()), flipped, money);

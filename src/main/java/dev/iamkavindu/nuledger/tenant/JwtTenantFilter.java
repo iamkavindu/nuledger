@@ -22,7 +22,6 @@ public class JwtTenantFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
         var auth = SecurityContextHolder.getContext().getAuthentication();
-
         if (!(auth instanceof JwtAuthenticationToken jwtAuth)) {
             filterChain.doFilter(request, response);
             return;

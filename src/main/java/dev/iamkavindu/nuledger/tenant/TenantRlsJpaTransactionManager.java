@@ -29,7 +29,6 @@ public class TenantRlsJpaTransactionManager extends JpaTransactionManager {
         }
 
         var tenantId = TenantContext.requireTenantId();
-
         entityManager.unwrap(Session.class).doWork(connection -> {
             try (var preparedStatement = connection.prepareStatement("SELECT set_config('app.tenant_id', ?, true)")) {
                 preparedStatement.setString(1, tenantId);
