@@ -1,0 +1,13 @@
+CREATE ROLE nuledger_owner
+    WITH LOGIN PASSWORD 'nuledger_owner'
+    NOSUPERUSER NOBYPASSRLS NOCREATEDB NOCREATEROLE;
+
+CREATE ROLE nuledger_app
+    WITH LOGIN PASSWORD 'nuledger_app'
+    NOSUPERUSER NOBYPASSRLS NOCREATEDB NOCREATEROLE;
+
+ALTER DATABASE nuledger OWNER TO nuledger_owner;
+
+GRANT CONNECT ON DATABASE nuledger TO nuledger_app;
+GRANT USAGE, CREATE ON SCHEMA public TO nuledger_owner;
+GRANT USAGE ON SCHEMA public TO nuledger_app;

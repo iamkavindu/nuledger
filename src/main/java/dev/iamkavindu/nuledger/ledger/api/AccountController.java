@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/{version}/accounts")
+@RequestMapping(value = "/api/{version}/accounts", version = "v1")
 public class AccountController {
 
     private final AccountService accountService;
@@ -35,22 +35,22 @@ public class AccountController {
                 .body(body);
     }
 
-    @GetMapping("/{id}")
-    public AccountResponse getById(@PathVariable UUID id) {
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<AccountResponse> getById(@PathVariable UUID id) {
         var account = accountService.requireAccount(AccountId.of(id));
-        return AccountMapper.toResponse(account);
+        return ResponseEntity.ok(AccountMapper.toResponse(account));
     }
 
     @GetMapping(params = "code")
-    public AccountResponse getByCode(@RequestParam String code) {
+    public ResponseEntity<AccountResponse> getByCode(@RequestParam String code) {
         var account = accountService.requireAccountByCode(code);
-        return AccountMapper.toResponse(account);
+        return ResponseEntity.ok(AccountMapper.toResponse(account));
     }
 
     @GetMapping("/{id}/balances")
-    public AccountBalancesResponse getBalances(@PathVariable UUID id) {
+    public ResponseEntity<AccountBalancesResponse> getBalances(@PathVariable UUID id) {
         var accountId = AccountId.of(id);
         var rows = accountService.getBalancesForAccount(accountId);
-        return AccountMapper.toBalancesResponse(id, rows);
+        return ResponseEntity.ok(AccountMapper.toBalancesResponse(id, rows));
     }
 }

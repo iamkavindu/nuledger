@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/api/{version}/transactions")
+@RequestMapping(path = "/api/{version}/transactions", version = "v1")
 public class TransactionController {
 
     private final LedgerService ledgerService;

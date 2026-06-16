@@ -9,8 +9,8 @@ public record Money(long amountMinor, String currency) {
 
     public Money {
         Objects.requireNonNull(currency, "currency must not be null");
-        if (amountMinor <= 0) {
-            throw new IllegalArgumentException("amountMinor must be positive");
+        if (amountMinor < 0) {
+            throw new IllegalArgumentException("amountMinor must not be negative");
         }
         if (currency.length() != 3) {
             throw new IllegalArgumentException("currency must be ISO 4217 code");
