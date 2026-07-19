@@ -13,18 +13,25 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>nuledger</name>
     <description>nuledger</description>
-    <url/>
+    <url>https://github.com/iamkavindu/nuledger</url>
     <licenses>
-        <license/>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
     </licenses>
     <developers>
-        <developer/>
+        <developer>
+            <id>iamkavindu</id>
+            <name>Kavindu Perera</name>
+        </developer>
     </developers>
     <scm>
-        <connection/>
-        <developerConnection/>
-        <tag/>
-        <url/>
+        <connection>scm:git:https://github.com/iamkavindu/nuledger.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/iamkavindu/nuledger.git</developerConnection>
+        <tag>HEAD</tag>
+        <url>https://github.com/iamkavindu/nuledger</url>
     </scm>
     <properties>
         <java.version>26</java.version>
